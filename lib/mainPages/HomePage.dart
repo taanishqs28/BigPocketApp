@@ -18,6 +18,9 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  TextEditingController _balanceController = TextEditingController();
+  double _totalBalance = 00.00; // Initial total balance
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,65 +36,76 @@ class _HomePageState extends State<HomePage> {
                 image: DecorationImage(
                     fit: BoxFit.fill,
                     image: AssetImage('assets/background.jpg'))),
-            child: Column(children: [
-              Padding(
-                  padding: EdgeInsets.fromLTRB(30, 60, 20, 20),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    // ignore: prefer_const_literals_to_create_immutables
-                    children: [
-                      CircleAvatar(
-                        minRadius: 25,
-                        backgroundImage: AssetImage('assets/profile.jpg'),
-                      ),
-                      ElevatedButton(
-                        onPressed: (() => {}),
-                        style: ButtonStyle(
-                            backgroundColor:
-                                MaterialStateProperty.all<Color>(Colors.white)),
-                        child: Align(
-                            alignment: Alignment.center,
-                            child: Text(
-                              "Payday in a week",
-                              style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black),
-                            )),
-                      )
-                    ],
-                  )),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.only(left: 30, bottom: 20, top: 15),
-                    child: Column(
+            child: Column(
+              children: [
+                Padding(
+                    padding: EdgeInsets.fromLTRB(30, 60, 20, 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       // ignore: prefer_const_literals_to_create_immutables
                       children: [
-                        Text(
-                          "Total Balance To Spend",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16,
-                          ),
+                        CircleAvatar(
+                          minRadius: 25,
+                          backgroundImage: AssetImage('assets/profile.jpg'),
                         ),
-                        Text(
-                          "5785.55",
-                          textAlign: TextAlign.left,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 35,
-                              fontWeight: FontWeight.bold),
+                        ElevatedButton(
+                          onPressed: (() => {}),
+                          style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                  Colors.white)),
+                          child: Align(
+                              alignment: Alignment.center,
+                              child: Text(
+                                "Payday in a week",
+                                style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black),
+                              )),
                         )
                       ],
+                    )),
+                Row(
+                  children: [
+                    // Add the "Available Balance" text label
+                    Text(
+                      "Available Balance (USD)",
+                      style: TextStyle(
+                        color: Colors.grey[700],
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                  )
-                ],
-              )
-            ]),
+                    SizedBox(width: 10), // Adjust the spacing as needed
+
+                    // Editable text field
+                    Expanded(
+                      child: TextField(
+                        controller: _balanceController,
+                        keyboardType: TextInputType.number,
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 35,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                        ),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          _totalBalance =
+                              double.tryParse(_balanceController.text) ?? 0.0;
+                        });
+                      },
+                      child: Text("Update"),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
           Padding(
             padding: EdgeInsets.fromLTRB(15, 20, 20, 15),

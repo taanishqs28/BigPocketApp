@@ -1,0 +1,1 @@
+ C:\\Users\\Albert\\Desktop\\CMPE\ 133\ Proj\ GH\\BigPocketApp\\.dart_tool\\flutter_build\\f36de255c5eb006233673ab02b95bce5\\native_assets.yaml: 
