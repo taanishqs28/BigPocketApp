@@ -1,5 +1,5 @@
-name: moneyapp_speed_code
-description: A new Flutter project.
+name: BigPocket
+description: A budgetting app.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
